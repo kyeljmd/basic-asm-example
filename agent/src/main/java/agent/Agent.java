@@ -18,7 +18,7 @@ public class Agent {
                 if ("other/Stuff".equals(s)) {
                     // ASM Code
                     ClassReader reader = new ClassReader(bytes);
-                    ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_MAXS);
+                    ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
                     ClassVisitor adapter = new ClassPrinter(writer);
                     /**
                      *  Use this one to deleted the run method from stuff

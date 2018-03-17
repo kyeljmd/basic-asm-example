@@ -5,5 +5,7 @@ public class Stuff {
 
     public void run() {
         System.out.println("Inside Run");
+        System.out.println(val + val);
+        System.out.println("Done performing addition");
     }
 }
