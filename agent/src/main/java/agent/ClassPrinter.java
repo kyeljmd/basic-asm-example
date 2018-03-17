@@ -49,7 +49,8 @@ public class ClassPrinter extends ClassVisitor {
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
         if(name.equals("run")) {
             MethodVisitor mv = cv.visitMethod(access, name, desc, signature, exceptions);
-            return mv == null ? null : new MethodAdapter(mv);
+            mv = new CodeInjectorAdapter(Opcodes.ASM4,mv,access,name,desc);
+           return mv;
         }
         return super.visitMethod(access, name, desc, signature, exceptions);
     }

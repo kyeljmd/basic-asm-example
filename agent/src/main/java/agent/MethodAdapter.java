@@ -19,7 +19,7 @@ class MethodAdapter extends MethodVisitor implements Opcodes {
     @Override
     public  void visitCode(){
         //Execute the method before coding through the lines of the code
-        mv.visitMethodInsn(Opcodes.INVOKESTATIC,"other/Stuff","run2","()V",false);
+        //mv.visitMethodInsn(Opcodes.INVOKESTATIC,"other/Stuff","run2","()V",false);
         super.visitCode();
     }
 }
