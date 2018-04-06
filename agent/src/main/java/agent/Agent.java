@@ -15,10 +15,10 @@ public class Agent {
         inst.addTransformer(new ClassFileTransformer() {
             @Override
             public byte[] transform(ClassLoader classLoader, String s, Class<?> aClass, ProtectionDomain protectionDomain, byte[] bytes) throws IllegalClassFormatException {
-                if(s.equals("org/springframework/web/servlet/FrameworkServlet")) {
+                if(s.equals("org/springframework/web/servlet/FrameworkServlet") || s.equals("javax/servlet/http/HttpServlet")) {
                     System.out.println("Loading the Class "+s);
                 }
-                if ("org/springframework/web/servlet/FrameworkServlet".equals(s)) {
+                if ("org/springframework/web/servlet/FrameworkServlet".equals(s) || s.equals("javax/servlet/http/HttpServlet")) {
                     // ASM Code
                     ClassReader reader = new ClassReader(bytes);
                     ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);

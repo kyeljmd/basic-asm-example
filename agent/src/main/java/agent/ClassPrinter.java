@@ -47,7 +47,7 @@ public class ClassPrinter extends ClassVisitor {
 
     @Override
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
-        if(name.equals("doGet") || name.equals("doDelete")  ||name.equals("doPost") || name.equals("doPut")   ) {
+        if(name.equals("doGet") || name.equals("doDelete")  ||name.equals("doPost") || name.equals("doPut") ) {
             System.out.println(">>>> Performing Bytecode Injection for Log metrics to method: "+name);
             MethodVisitor mv = cv.visitMethod(access, name, desc, signature, exceptions);
             LogInjectorAdapter logInjectorAdapter =  new LogInjectorAdapter(Opcodes.ASM4,mv,access,name,desc);
