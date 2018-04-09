@@ -8,6 +8,8 @@ import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.lang.instrument.Instrumentation;
 import java.security.ProtectionDomain;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Agent {
 
@@ -34,6 +36,17 @@ public class Agent {
                 return null;
             }
         });
+
+        ///Write the agent thread that Polls
+        Timer timer = new Timer();
+        int begin = 1000; //timer starts after 1 second.
+        int timeinterval = 10 * 1000; //timer executes every 10 seconds.
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                MyReporter.readEventThreads();
+            }
+        },begin, timeinterval);
     }
 
 }
