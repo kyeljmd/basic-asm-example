@@ -10,6 +10,9 @@ import java.lang.instrument.Instrumentation;
 import java.security.ProtectionDomain;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Agent {
 
@@ -37,16 +40,8 @@ public class Agent {
             }
         });
 
-        ///Write the agent thread that Polls
-        Timer timer = new Timer();
-        int begin = 1000; //timer starts after 1 second.
-        int timeinterval = 10 * 1000; //timer executes every 10 seconds.
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                MyReporter.readEventThreads();
-            }
-        },begin, timeinterval);
+        ScheduledExecutorService executor =  Executors.newScheduledThreadPool(1);
+        executor.scheduleAtFixedRate(new SendEventTask(), 0, 10, TimeUnit.SECONDS);
     }
 
 }
